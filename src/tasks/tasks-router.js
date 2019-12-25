@@ -1,6 +1,7 @@
 const express = require('express');
 const TasksService = require('./tasks-service');
 const xss = require("xss");
+const { requireAuth } = require('../middleware/jwt-auth')
 
 const TasksRouter = express.Router();
 const jsonParser = express.json();
@@ -18,7 +19,7 @@ TasksRouter
     .get((req, res, next) => {
         const knexInstance = req.app.get("db");
         TasksService.getAllTasks(knexInstance)
-            .then( tasks => {
+            .then(tasks => {
                 const cleanTasks = tasks.map(task => {
                     return serializeTask(task);
                 });
@@ -30,10 +31,10 @@ TasksRouter
         const { title, image } = req.body;
         const newTask = { title, image }
 
-        for(const [key, value] of Object.entries(newTask)) {
-            if(value == null) {
+        for (const [key, value] of Object.entries(newTask)) {
+            if (value == null) {
                 return res.status(400).json({
-                    error: { message: `Missing ${key} in request in request body`}
+                    error: { message: `Missing ${key} in request in request body` }
                 })
             }
         }
@@ -45,7 +46,7 @@ TasksRouter
             req.app.get('db'),
             newTask
         )
-            .then( task => {
+            .then(task => {
                 res
                     .status(201)
                     .location(path.posix.join(req.originalUrl, `/${task.id}`))
@@ -54,38 +55,39 @@ TasksRouter
             .catch(next)
     })
 
-    TasksRouter
-        .route("/:task_id")
-        .all(requireAuth)//basic auth
-        .get((req, res, next) => {
-            const knexInstance = req.app.get("db")
-            TasksService.getById(knexInstance, req.params.task_id)
-                .then(task => {
-                    if(!task) {
-                        return res.status(404).json({
-                            error: { message: "Task doesn't exist" }
-                        });
-                    }
-                    res.json(serializeTask(task));
-                })
-                .catch(next);
-        })
-        .delete((req, res, next) => {
-            const { task_id } = req.params;
-            TasksService.deleteTask(
-                req.app.get("db"),
-                task_id
-            )
+TasksRouter
+    .route("/:task_id")
+    .all(requireAuth)//basic auth
+    .get((req, res, next) => {
+        const knexInstance = req.app.get("db")
+        TasksService.getById(knexInstance, req.params.task_id)
+            .then(task => {
+                if (!task) {
+                    return res.status(404).json({
+                        error: { message: "Task doesn't exist" }
+                    });
+                }
+                res.json(serializeTask(task));
+            })
+            .catch(next);
+    })
+    .delete((req, res, next) => {
+        const { task_id } = req.params;
+        TasksService.deleteTask(
+            req.app.get("db"),
+            task_id
+        )
             .then(numRowsAffected => {
-                if(numRowsAffected > 0){
+                if (numRowsAffected > 0) {
                     return res.status(204).end();
                 }
                 else {
                     return res.status(404).json({
-                        error: {"message": "Task Not Found"}
+                        error: { "message": "Task Not Found" }
                     });
                 }
             })
             .catch(next);
-        });
-    
+    });
+
+module.exports = TasksRouter

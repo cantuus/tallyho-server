@@ -41,4 +41,15 @@ LoginRouter
             .catch(next)
     })
 
+    // todo: remove this once you have a working jwt token
+    // api/auth/createtoken
+LoginRouter
+    .post('/createtoken', jsonBodyParser, (req, res, next) => {
+        const sub = "tallyho_user@gmail.com"
+        const payload = { user_id: 1 }
+        res.send({
+            authToken: LoginAuthService.createJwt(sub, payload),
+        })
+    })
+
     module.exports = LoginRouter;

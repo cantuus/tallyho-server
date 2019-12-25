@@ -1,5 +1,5 @@
 {
-  "name": "express-boilerplate",
+  "name": "tallyho-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -21,6 +21,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.4",
     "morgan": "^1.9.1",
     "pg": "^7.15.1",

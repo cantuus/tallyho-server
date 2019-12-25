@@ -13,13 +13,20 @@ const LoginAuthService = {
         return bcrypt.compare(password, hash)
     },
 
-    createJwt(subject, payLoad) {
-        return jwt.sign(payload, config.JWT_SECRET, {
-            subject,
-            algorithm: 'HS256',
-        })
+    // payload is {user_id: 1}
+    // subject is email
+    // secret is tallyho!
+    // reference the post method in login router to create a jwt token
+    createJwt(subject, payload) {
+        const options = {
+                subject,
+                algorithm: 'HS256',
+        };
+        return jwt.sign(payload, config.JWT_SECRET, options);     
     },
 
+    //takes the token string (payload, subject, secret together) and decrypt it to get the secret from the string.
+    //takes the secret from the string to compare to the secret on the server and validates!
     verifyJwt(token) {
         return jwt.verify(token, config.JWT_SECRET, {
             algorithms: ['HS256'],
