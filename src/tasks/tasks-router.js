@@ -49,7 +49,7 @@ TasksRouter
             .then(task => {
                 res
                     .status(201)
-                    .location(path.posix.join(req.originalUrl, `/${task.id}`))
+                    .location( `/api/tasks/${task.id}`)
                     .json(serializeTask(task))
             })
             .catch(next)
