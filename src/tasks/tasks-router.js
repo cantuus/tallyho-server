@@ -6,12 +6,16 @@ const { requireAuth } = require('../middleware/jwt-auth')
 const TasksRouter = express.Router();
 const jsonParser = express.json();
 
+//Not seeing the object key you need? moddify the function below
 //sanitation logic
 const serializeTask = task => ({
     id: task.id,
     title: xss(task.title),
     image: task.image,
+    checked: task.checked,
+    user_id: task.user_id
 });
+
 
 TasksRouter
     .route("/")
@@ -29,6 +33,8 @@ TasksRouter
     })
     .post(requireAuth, jsonParser, (req, res, next) => {
         const { title, image } = req.body;
+        const  user_id = req.user.id;
+
         const newTask = { title, image }
 
         for (const [key, value] of Object.entries(newTask)) {
@@ -39,6 +45,7 @@ TasksRouter
             }
         }
 
+        newTask.user_id = user_id;
         newTask.title = title;
         newTask.image = image;
 
