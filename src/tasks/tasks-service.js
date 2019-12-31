@@ -1,6 +1,6 @@
 const TasksService = {
     getAllTasks(knex) {
-        return knex.select("*").from("tallyho_tasks");
+        return knex.select("*").from("tallyho_tasks").orderBy('id');
     },
     insertTask(knex, newTask) {
         return knex

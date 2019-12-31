@@ -5,6 +5,7 @@ const { requireAuth } = require('../middleware/jwt-auth')
 
 const TasksRouter = express.Router();
 const jsonParser = express.json();
+const bodyParser = express.json();
 
 //Not seeing the object key you need? moddify the function below
 //sanitation logic
@@ -33,7 +34,8 @@ TasksRouter
     })
     .post(requireAuth, jsonParser, (req, res, next) => {
         const { title, image } = req.body;
-        const  user_id = req.user.id;
+        const user_id = req.user.id;
+        console.log(req);
 
         const newTask = { title, image }
 
@@ -56,7 +58,7 @@ TasksRouter
             .then(task => {
                 res
                     .status(201)
-                    .location( `/api/tasks/${task.id}`)
+                    .location(`/api/tasks/${task.id}`)
                     .json(serializeTask(task))
             })
             .catch(next)
@@ -95,6 +97,28 @@ TasksRouter
                 }
             })
             .catch(next);
-    });
+    })
+    .patch(bodyParser, (req, res, next) => {
+        const { title, image, checked } = req.body
+        const taskToUpdate = { title, image, checked }
+
+        const numberOfValues = Object.values(taskToUpdate).filter(Boolean).length
+        if (numberOfValues === 0)
+            return res.status(400).json({
+                error: {
+                    message: `Request body must content either 'title', 'image', or 'checked'`
+                }
+            })
+
+        TasksService.updateTask(
+            req.app.get('db'),
+            req.params.task_id,
+            taskToUpdate
+        )
+            .then(numRowsAffected => {
+                res.status(204).end()
+            })
+            .catch(next)
+    })
 
 module.exports = TasksRouter
