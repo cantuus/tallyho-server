@@ -64,6 +64,10 @@ TasksRouter
             .catch(next)
     })
 
+//todo: create a patch function for the root route and iterate through the array of objects
+//note: make sure to put the .then after the for loop iteration
+
+
 TasksRouter
     .route("/:task_id")
     .all(requireAuth)//basic auth
@@ -109,6 +113,8 @@ TasksRouter
                     message: `Request body must content either 'title', 'image', or 'checked'`
                 }
             })
+
+        //todo: line 45 to the function should be its own separate function
 
         TasksService.updateTask(
             req.app.get('db'),
