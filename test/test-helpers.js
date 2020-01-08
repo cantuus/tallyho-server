@@ -28,19 +28,22 @@ function makeTasksArray(users) {
             id: 1,
             title: 'Legoland',
             image: 'https://upload.wikimedia.org/wikipedia/commons/2/2d/Sleeping_Beauty_Castle_2019.jpg',
-            user_id: users[0].id
+            checked: false,
+            user_id: 1,
         },
         {
             id: 2,
             title: 'Disneyland',
             image: 'https://timeincsecure-a.akamaihd.net/rtmp_uds/3281700261001/201911/2124/3281700261001_6105587570001_6105572256001-vs.jpg?pubId=3281700261001&videoId=6105572256001',
-            user_id: users[0].id
+            checked: false,
+            user_id: 1,
         },
         {
             id: 3,
             title: 'SeaWorld',
             image: 'https://cdn.getyourguide.com/img/tour_img-525172-146.jpg',
-            user_id: users[0].id
+            checked: false,
+            user_id: 2,
         },
 
     ]
@@ -109,7 +112,7 @@ function seedUsers(db, users) {
 }
 
 function seedTasks(db, tasks) {
-    return db.into('tally_tasks').insert(things)
+    return db.into('tallyho_tasks').insert(tasks)
         .then(() =>
             db.raw(
                 `SELECT setval('tallyho_tasks_id_seq', ?)`,
@@ -121,7 +124,7 @@ function seedTasksTables(db, users, tasks = []) {
     return db.transaction(async trx => {
 
         await seedUsers(trx, users)
-        await seedThings(trx, tasks)
+        await seedTasks(trx, tasks)
     })
 }
 

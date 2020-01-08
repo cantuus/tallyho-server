@@ -1,7 +1,6 @@
 const knex = require('knex')
 const app = require('../src/app')
 const helpers = require('./test-helpers')
-const jwt = require('jsonwebtoken')
 
 describe('Tasks Endpoints', function () {
     let db
@@ -27,14 +26,27 @@ describe('Tasks Endpoints', function () {
 
     describe(`GET /api/tasks`, () => {
 
-        context('Given no tasks', () => {
+        context('Given there are tasks in the database', () => {
+            beforeEach('insert users and tasks', async () => {
+                await helpers.seedUsers(db, testUsers)
+                await helpers.seedTasks(db, testTasks)
+            })
 
-            it(`responds with 200 and an empty list`, () => {
+            it('responds with 200 and all of the tasks', (done) => {
+                const expectedTasks = testTasks.map(task =>
+                    helpers.makeExpectedTask(
+                        testUsers,
+                        task,
+                    )
+                )
+
+                done()
+
                 return supertest(app)
-                    .get('api/tasks')
+                    .get('/api/tasks')
                     .set("Authorization", helpers.makeAuthHeader(testUsers[0]))
-                    .expect(200, [])
+                    .expect(200, expectedTasks)
             })
         })
     })
-}
+})
