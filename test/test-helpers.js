@@ -132,7 +132,7 @@ function seedMaliciousTask(db, user, task) {
     return seedUsers(db, [user])
         .then(() =>
             db
-                .into('tallyho_users')
+                .into('tallyho_tasks')
                 .insert([task])
         )
 }

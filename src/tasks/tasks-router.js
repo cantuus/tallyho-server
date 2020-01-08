@@ -72,12 +72,8 @@ TasksRouter
                 res.status(204).end()
             })
             .catch(next)
-        //todo: line 45 to the function should be its own separate function - loop through the array and call update tasks on each task,
-        //try out .map or use a forEach. Make sure to return a promise
     })
 
-//todo: create a patch function for the root route and iterate through the array of objects
-//note: make sure to put the .then after the for loop iteration
 
 
 TasksRouter
