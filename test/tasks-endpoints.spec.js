@@ -97,5 +97,29 @@ describe('Tasks Endpoints', function () {
             })
 
         })
+
+        context(`Given an XSS attack thing`, () => {
+            const testUser = helpers.makeUsersArray()[1]
+            const {
+                maliciousTask,
+                expectedTask,
+            } = helpers.makeMaliciousTask(testUser)
+
+            beforeEach('insert malicious thing', async () => {
+                await helpers.seedMaliciousTask(
+                    db,
+                    testUser,
+                    maliciousTask,
+                )
+            })
+
+            it('removes XSS attack content', (done) => {
+                done()
+                return supertest(app)
+                    .get(`/api/things/${maliciousThing.id}`)
+                    .set("Authorization", helpers.makeAuthHeader(testUsers[0]))
+                    .expect(401)
+            })
+        })
     })
 })
