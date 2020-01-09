@@ -73,6 +73,29 @@ describe('Tasks Endpoints', function () {
         })
     })
 
-    
-})
+    describe(`GET /api/tasks/:task_id`, () => {
 
+        context('Given there are tasks in the database', () => {
+            beforeEach('insert users and tasks', async () => {
+                await helpers.seedUsers(db, testUsers);
+                await helpers.seedTasks(db, testTasks);
+            })
+
+            it('responds with 200 and the specified task', (done) => {
+                const taskId = 2
+                const expectedTask = helpers.makeExpectedTask(
+                    testUsers,
+                    testTasks[taskId - 1],
+                )
+
+                done();
+
+                return supertest(app)
+                    .get(`/api/things/${taskId}`)
+                    .set("Authorization", helpers.makeAuthHeader(testUsers[0]))
+                    .expect(200, expectedTask)
+            })
+
+        })
+    })
+})
