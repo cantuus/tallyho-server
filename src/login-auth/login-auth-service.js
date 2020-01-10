@@ -19,10 +19,10 @@ const LoginAuthService = {
     // reference the post method in login router to create a jwt token
     createJwt(subject, payload) {
         const options = {
-                subject,
-                algorithm: 'HS256',
+            subject,
+            algorithm: 'HS256',
         };
-        return jwt.sign(payload, config.JWT_SECRET, options);     
+        return jwt.sign(payload, config.JWT_SECRET, options);
     },
 
     //takes the token string (payload, subject, secret together) and decrypt it to get the secret from the string.

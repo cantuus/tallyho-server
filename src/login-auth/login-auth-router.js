@@ -13,7 +13,7 @@ LoginRouter
                 return res.status(400).json({
                     error: `Missing '${key}' in request body`
                 })
-        
+
         LoginAuthService.getUserWithEmail(
             req.app.get('db'),
             loginUser.email
@@ -23,10 +23,10 @@ LoginRouter
                     return res.status(400).json({
                         error: 'Incorrect email or password',
                     })
-                
+
                 return LoginAuthService.comparePasswords(loginUser.password, dbUser.password)
                     .then(compareMatch => {
-                        if(!compareMatch)
+                        if (!compareMatch)
                             return res.status(400).json({
                                 error: 'Incorrect email or password',
                             })
@@ -41,15 +41,4 @@ LoginRouter
             .catch(next)
     })
 
-    // todo: remove this once you have a working jwt token
-    // api/auth/createtoken
-LoginRouter
-    .post('/createtoken', jsonBodyParser, (req, res, next) => {
-        const sub = "tallyho_user@gmail.com"
-        const payload = { user_id: 1 }
-        res.send({
-            authToken: LoginAuthService.createJwt(sub, payload),
-        })
-    })
-
-    module.exports = LoginRouter;
+module.exports = LoginRouter;

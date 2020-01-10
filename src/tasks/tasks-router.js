@@ -8,8 +8,6 @@ const TasksRouter = express.Router();
 const jsonParser = express.json();
 const bodyParser = express.json();
 
-//Not seeing the object key you need? moddify the function below
-//sanitation logic
 const serializeTask = task => ({
     id: task.id,
     title: xss(task.title),
@@ -36,7 +34,6 @@ TasksRouter
     .post(requireAuth, jsonParser, (req, res, next) => {
         const { title, image } = req.body;
         const user_id = req.user.id;
-        console.log(req);
 
         const newTask = { title, image }
 
@@ -121,10 +118,6 @@ TasksRouter
                     message: `Request body must content either 'title', 'image', or 'checked'`
                 }
             })
-
-        //todo: line 45 to the function should be its own separate function - loop through the array and call update tasks on each task,
-        //try out .map or use a forEach. Make sure to return a promise
-
 
         TasksService.updateTask(
             req.app.get('db'),
