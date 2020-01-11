@@ -1,26 +1,37 @@
-# Express Boilerplate!
+## Tallyho
 
-This is a boilerplate project used for starting new projects!
+![screencapture-localhost-3000-2020-01-10-15_15_23](https://user-images.githubusercontent.com/47515086/72193025-9bdc5d80-33bc-11ea-990f-189f6b396070.png)
 
-## Set up
+### What's Tallyho
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+Tallyho is a visual schedule application where Users can sign up for an account and make a visual schedule to cater to their child's day routine. This minimizes the labor of making a visual schedule or PECS (Picture Exchange Communication System) to use an easy accessible online aplication.  The User can create multiple tasks to build their schedule as well check off individual tasks when tasks are completed. The User can delete a task of their choosing.  The User can edit and save multiple tasks on the same page. 
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+[Live app] (https://sophie-tally-ho-app.now.sh/)
 
-## Scripts
+### Built on:
 
-Start the application `npm start`
+> NodeJS, ExpressJS, KnexJS, PostgreSQL
 
-Start nodemon for the application `npm run dev`
+> Testing done with Mocha & Chai
 
-Run the tests `npm test`
+### Core Features
 
-## Deploying
+> Ability to create/login with user accounts
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+> Ability to create/edit/delete tasks
+
+> Users can check off tasks
+
+## Upcoming features
+ > User can click and drag tasks to rearrange the order
+ 
+ > User will be able to upload a personal image from their local computer or have the option to take a picture using their
+  mobile device's camera
+ 
+ > After all tasks are checked off, it will show a congratulatory animation for completing the schedule 
+
+## Connect with me
+
+> [My Linkedin](https://www.linkedin.com/in/sophiakoeut/)
+
+> [My Email](koeutsophia@gmail.com)
