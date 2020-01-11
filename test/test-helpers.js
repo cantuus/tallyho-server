@@ -120,14 +120,6 @@ function seedTasks(db, tasks) {
             ))
 }
 
-function seedTasksTables(db, users, tasks = []) {
-    return db.transaction(async trx => {
-
-        await seedUsers(trx, users)
-        await seedTasks(trx, tasks)
-    })
-}
-
 function seedMaliciousTask(db, user, task) {
     return seedUsers(db, [user])
         .then(() =>

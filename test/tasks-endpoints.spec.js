@@ -44,7 +44,7 @@ describe('Tasks Endpoints', function () {
 
                 return supertest(app)
                     .get('/api/tasks')
-                    .set("Authorization", helpers.makeAuthHeader(testUsers[0]))
+                    .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
                     .expect(200, expectedTasks)
             })
         })
@@ -67,7 +67,7 @@ describe('Tasks Endpoints', function () {
             it('removes XSS attack content', () => {
                 return supertest(app)
                     .get(`/api/tasks`)
-                    .set("Authorization", helpers.makeAuthHeader(testUsers[0]))
+                    .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
                     .expect(401)
             })
         })
@@ -92,7 +92,7 @@ describe('Tasks Endpoints', function () {
 
                 return supertest(app)
                     .get(`/api/things/${taskId}`)
-                    .set("Authorization", helpers.makeAuthHeader(testUsers[0]))
+                    .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
                     .expect(200, expectedTask)
             })
 
@@ -117,7 +117,7 @@ describe('Tasks Endpoints', function () {
                 done()
                 return supertest(app)
                     .get(`/api/things/${maliciousThing.id}`)
-                    .set("Authorization", helpers.makeAuthHeader(testUsers[0]))
+                    .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
                     .expect(401)
             })
         })

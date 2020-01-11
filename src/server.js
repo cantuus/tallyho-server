@@ -10,7 +10,6 @@ const db = knex({
 // express declares the equivalent of a global variable called db
 app.set("db", db);
 
-
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
 })

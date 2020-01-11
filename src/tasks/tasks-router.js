@@ -2,7 +2,6 @@ const express = require('express');
 const TasksService = require('./tasks-service');
 const xss = require("xss");
 const { requireAuth } = require('../middleware/jwt-auth')
-const TasksHelper = require('./tasks-helper')
 
 const TasksRouter = express.Router();
 const jsonParser = express.json();
@@ -61,16 +60,6 @@ TasksRouter
             })
             .catch(next)
     })
-    .patch(bodyParser, (req, res, next) => {
-        const { tasks } = req.body
-
-        TasksHelper.updateTasks(tasks, req.app.get('db'))
-            .then(numRowsAffected => {
-                res.status(204).end()
-            })
-            .catch(next)
-    })
-
 
 
 TasksRouter
