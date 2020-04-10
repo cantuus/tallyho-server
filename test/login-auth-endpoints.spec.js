@@ -41,6 +41,7 @@ describe('Login-Auth Endpoints', function () {
                 process.env.JWT_SECRET,
                 {
                     subject: testUser.email,
+                    expiresIn: process.env.JWT_EXPIRY,
                     algorithm: 'HS256',
                 }
             )
