@@ -1,5 +1,6 @@
 const express = require('express')
 const LoginAuthService = require('./login-auth-service')
+const { requireAuth } = require('../middleware/jwt-auth')
 const LoginRouter = express.Router()
 const jsonBodyParser = express.json()
 
@@ -39,6 +40,15 @@ LoginRouter
                     })
             })
             .catch(next)
+    })
+
+LoginRouter
+    .post('/refresh', requireAuth, (req, res) => {
+        const sub = req.user.email
+        const payload = { user_id: req.user.id }
+        res.send({
+            authToken: LoginAuthService.createJwt(sub, payload),
+        })
     })
 
 module.exports = LoginRouter;
