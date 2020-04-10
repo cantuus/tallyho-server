@@ -20,6 +20,7 @@ const LoginAuthService = {
     createJwt(subject, payload) {
         const options = {
             subject,
+            expiresIn: config.JWT_EXPIRY,
             algorithm: 'HS256',
         };
         return jwt.sign(payload, config.JWT_SECRET, options);
