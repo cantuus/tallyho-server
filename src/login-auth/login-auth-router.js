@@ -2,6 +2,7 @@ const express = require('express')
 const LoginAuthService = require('./login-auth-service')
 const LoginRouter = express.Router()
 const jsonBodyParser = express.json()
+const { requireAuth } = require('../middleware/jwt-auth')
 
 LoginRouter
     .post('/login', jsonBodyParser, (req, res, next) => {
@@ -39,6 +40,16 @@ LoginRouter
                     })
             })
             .catch(next)
+    })
+
+    .put(requireAuth, (req, res) => {
+        const sub = req.user.email
+        const payload = {
+            user_id: req.user.id,
+        }
+        res.send({
+            authToken: LoginAuthService.createJwt(sub, payload),
+        })
     })
 
 module.exports = LoginRouter;
