@@ -1,6 +1,7 @@
+
 ## Tallyho
 
-![screencapture-localhost-3000-2020-01-10-15_15_23](https://user-images.githubusercontent.com/47515086/72193025-9bdc5d80-33bc-11ea-990f-189f6b396070.png)
+![Landingpage](src/img/landing-page.png "Landing Page")
 
 ### What's Tallyho
 
@@ -8,14 +9,17 @@ Tallyho is a visual schedule application where Users can sign up for an account 
 
 >Live demo: https://sophie-tally-ho-app.now.sh/
 
->Server Repo: https://github.com/cantuus/tallyho-client
+>Server Repo: https://github.com/cantuus/tallyho-server
 
+### Demo Login:
+
+>Username: test@gmail.com
+
+>Password: !Testing123
 
 ### Built on:
 
-> NodeJS, ExpressJS, KnexJS, PostgreSQL
-
-> Testing done with Mocha & Chai
+> ReactJS, CSS
 
 ### Core Features
 
@@ -31,15 +35,14 @@ Tallyho is a visual schedule application where Users can sign up for an account 
  > User will be able to upload a personal image from their local computer or have the option to take a picture using their
   mobile device's camera
  
- > After all tasks are checked off, it will show a congratulatory animation for completing the schedule
+ > After all tasks are checked off, it will show a congratulatory animation for completing the schedule 
 
 ## Screenshots
-![Login](src/images/tallyho-login.png "Login")
-![Register](src/images/tallyho-register.png "Register")
-![Dashboard](src/images/tallyho.png "Dashboard")
-![Add page](src/images/tallyho-add.png "Add-page")
-![Edit page](src/images/tallyho-edit.png "Edit-page") 
-
+![Login](src/img/tallyho-login.png "Login")
+![Register](src/img/tallyho-register.png "Register")
+![Dashboard](src/img/tallyho.png "Dashboard")
+![Add page](src/img/tallyho-add.png "Add-page")
+![Edit page](src/img/tallyho-edit.png "Edit-page") 
 ## Connect with me
 
 > [My Linkedin](https://www.linkedin.com/in/sophiakoeut/)
