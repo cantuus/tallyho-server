@@ -1,7 +1,7 @@
 
 ## Tallyho
 
-![Landingpage](src/img/landing-page.png "Landing Page")
+![Landingpage](src/images/landing-page.png "Landing Page")
 
 ### What's Tallyho
 
@@ -38,11 +38,11 @@ Tallyho is a visual schedule application where Users can sign up for an account 
  > After all tasks are checked off, it will show a congratulatory animation for completing the schedule 
 
 ## Screenshots
-![Login](src/img/tallyho-login.png "Login")
-![Register](src/img/tallyho-register.png "Register")
-![Dashboard](src/img/tallyho.png "Dashboard")
-![Add page](src/img/tallyho-add.png "Add-page")
-![Edit page](src/img/tallyho-edit.png "Edit-page") 
+![Login](src/images/tallyho-login.png "Login")
+![Register](src/images/tallyho-register.png "Register")
+![Dashboard](src/images/tallyho.png "Dashboard")
+![Add page](src/images/tallyho-add.png "Add-page")
+![Edit page](src/images/tallyho-edit.png "Edit-page") 
 ## Connect with me
 
 > [My Linkedin](https://www.linkedin.com/in/sophiakoeut/)
